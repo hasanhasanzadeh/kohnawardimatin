@@ -15,15 +15,15 @@
             </a>
         </div>
         <div class="mx-auto my-3">
-            <a href="{{route('customers.show',$order->user_id)}}" title="{{$order->user->full_name.' - '.$order->user->mobile}}">
+            <a href="{{route('customers.show',$order->user_id)}}" title="{{$order->user?->full_name.' - '.$order->user?->mobile}}">
                 @if($order->user?->photo)
-                    <img src="{{$order->user?->photo->address}}" class="rounded-full shadow " height="100" width="100" alt="{{$order->user->full_name.' - '.$order->user->mobile}}">
+                    <img src="{{$order->user?->photo->address}}" class="rounded-full shadow " height="100" width="100" alt="{{$order->user?->full_name.' - '.$order->user->mobile}}">
                 @else
-                    <img src="{{url('/default-images/avatar.png')}}" class="rounded-full shadow " height="100" width="100" alt="{{$order->user->full_name.' - '.$order->user->mobile}}">
+                    <img src="{{url('/default-images/avatar.png')}}" class="rounded-full shadow " height="100" width="100" alt="{{$order->user?->full_name .' - '.$order->user?->mobile}}">
                 @endif
             </a>
-            <h3 class="p-2 dark:text-gray-50"> نام کاربر :{{$order->user->full_name}}</h3>
-            <h3 class="p-2 dark:text-gray-50">شماره موبایل کاربر :{{$order->user->mobile}}</h3>
+            <h3 class="p-2 dark:text-gray-50"> نام کاربر :{{$order->user?->full_name}}</h3>
+            <h3 class="p-2 dark:text-gray-50">شماره موبایل کاربر :{{$order->user?->mobile }}</h3>
             <h3 class="p-2 dark:text-gray-50">
                 <span class=" dark:text-gray-50">وضعیت سفارش :</span>
                 @if($order->status==1)
@@ -159,7 +159,7 @@
                     <td class="px-4 py-3 text-sm">موبایل تحویل گیرنده</td>
                     <td class="px-4 py-3 text-sm">{{$order->address->receptor_mobile}}</td>
                     <td class="px-4 py-3 text-sm">ایمیل و شماره تلفن کاربر</td>
-                    <td class="px-4 py-3 text-sm" colspan="2">{{$order->user->email.' '.$order->user->mobile}}</td>
+                    <td class="px-4 py-3 text-sm" colspan="2">{{$order->user?->email.' '.$order->user?->mobile}}</td>
                 </tr>
                 <tr class=" dark:text-gray-400 p-4 text-center text-yellow-500 bg-yellow-200">
                     <td class="px-4 py-3 text-xl" colspan="2">کد رهگیری پست</td>

@@ -1,0 +1,50 @@
+@import "../../node_modules/@fortawesome/fontawesome-free/css/brands.css";
+@import "../../node_modules/@fortawesome/fontawesome-free/css/fontawesome.css";
+@import "../../node_modules/@fortawesome/fontawesome-free/css/regular.css";
+@import "../../node_modules/@fortawesome/fontawesome-free/css/solid.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: Vazir;
+    src: url("../../public/fonts/Vazir-Regular.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: Vazir;
+    src: url("../../public/fonts/Vazir-Bold.woff2") format("woff2");
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: Vazir;
+    src:url("../../public/fonts/Vazir-Black.woff2") format("woff2");
+    font-weight: 900;
+    font-style: normal;
+}
+@font-face {
+    font-family: Vazir;
+    src:url("../../public/fonts/Vazir-Medium.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: Vazir;
+    src: url("../../public/fonts/Vazir-Light.woff2") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: Vazir;
+    src:url("../../public/fonts/Vazir-Thin.woff2") format("woff2");
+    font-weight: 100;
+    font-style: normal;
+}
+:root {
+    writing-mode: horizontal-tb; /* or vertical-rl, etc. */
+    direction: rtl; /* or rtl */
+    text-orientation: mixed; /* or upright, sideways, etc. */
+}

@@ -1,0 +1,157 @@
+@extends('panel.layouts.panel')
+
+@section('content')
+    <div class="container px-6 mx-auto grid">
+        <span class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+            {{$title}}
+        </span>
+        <div class="flex">
+            <a href="{{route('products.create')}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-auto">
+                <i class="fa fa-plus"></i>
+                {{__('dashboard.create')}}
+            </a>
+        </div>
+        <!-- New Table -->
+        <div class="w-full overflow-hidden rounded-lg shadow-xs" >
+            <div class="w-full overflow-x-auto">
+                @if(!$products->isEmpty())
+                    <table class="w-full ">
+                        <thead>
+                        <tr class="text-xs font-bold tracking-wide text-center text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800" >
+                            <th class="px-4 py-3">{{__('dashboard.row')}}</th>
+                            <th class="px-4 py-3">{{__('dashboard.photo')}}</th>
+                            <th class="px-4 py-3">{{__('dashboard.sku')}}</th>
+                            <th class="px-4 py-3">@sortablelink('title',__('dashboard.title'))</th>
+                            <th class="px-4 py-3">{{__('dashboard.url')}}</th>
+                            <th class="px-4 py-3">@sortablelink('price',__('dashboard.price'))</th>
+                            <th class="px-4 py-3">@sortablelink('status',__('dashboard.status'))</th>
+                            <th class="px-4 py-3">@sortablelink('created_at',__('dashboard.created_at'))</th>
+                            <th class="px-4 py-3">{{__('dashboard.operation')}}</th>
+                        </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800 text-center">
+                        @php $row=1 @endphp
+                        @foreach($products as $product)
+                            <tr class="text-gray-700 dark:text-gray-400">
+                                <td class="px-4 py-3 text-sm">
+                                    {{$row++}}
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    @if($product->photo)
+                                        <a href="{{route('products.show',$product->id)}}" title="{{$product->title}}"> <img src="{{$product->photo->address}}"  height="140" width="100" alt="" class="image-grayscale mx-auto"></a>
+                                    @else
+                                        <a href="{{route('products.show',$product->id)}}" title="{{$product->title}}"> <i class="fas fa-camera  text-5xl"></i></a>
+                                    @endif
+                                </td>
+                                <td class="px-4 py-3 text-xs">
+                                    {{$product->sku}}
+                                </td>
+                                <td class="px-4 py-3 text-xs">
+                                    {{$product->title}}
+                                </td>
+                                <td class="px-4 py-3 text-xs" dir="ltr">
+                                    <a href="{{url('/product/show/'.$product->slug)}}" target="_blank">
+                                        {{url('/product/show/'.$product->slug)}}
+                                    </a>
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    @if(config('app.locale')=='en')
+                                        {{number_format($product->price,2)}}
+                                    @else
+                                        {{number_format($product->price,0) .' '.__('dashboard.toman')}}
+                                    @endif
+
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    @if($product->status=='active')
+                                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-emerald-600 bg-emerald-200 uppercase last:mr-0 mr-1">
+                                            {{__('dashboard.active')}}
+                                        </span>
+                                    @elseif($product->status=='inactive')
+                                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-rose-600 bg-rose-200 uppercase last:mr-0 mr-1">
+                                             {{__('dashboard.inactive')}}
+                                        </span>
+                                    @elseif($product->status=='soon')
+                                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-blue-600 bg-blue-200 uppercase last:mr-0 mr-1">
+                                            {{__('dashboard.soon')}}
+                                        </span>
+                                    @endif
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    @if(config('app.locale')=='fa')
+                                        {{verta()->instance($product->created_at)->format('%d %B %Y')}}
+                                    @else
+                                        {{ date('d-M-y', strtotime($product->created_at))}}
+                                    @endif
+                                </td>
+                                <td class="px-4 py-3">
+                                    <div class=" text-xl flex justify-center">
+                                    <a href="{{route('products.show',$product->id)}}" class="text-blue-500 mx-2" title="{{__('dashboard.show')}}">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                    <a href="{{route('products.edit',$product->id)}}" class="text-yellow-900 mx-2" title="{{__('dashboard.edit')}}">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <form action="{{route('products.status',$product->id)}}" class="mx-2" method="GET" id="form-1">
+                                        @csrf
+                                        <input type="hidden" name="status" value="{{$product->status}}">
+                                        <button type="submit"  class="@if($product->status=='active') text-green-600 @elseif($product->status=='inactive') text-red-600 @elseif($product->status=='soon') text-yellow-700 @endif text-2xl" title="{{__('dashboard.status')}}">
+                                            @if($product->status=='active')
+                                                <i class="fa-solid fa-circle-check"></i>
+                                            @elseif($product->status=='inactive')
+                                                <i class="fa-solid fa-circle-xmark"></i>
+                                            @elseif($product->status=='soon')
+                                                <i class="fa-regular fa-rectangle-xmark"></i>
+                                            @endif
+                                        </button>
+                                    </form>
+                                    <form action="{{route('products.destroy',$product->id)}}" class="mx-auto" id="form-2" method="POST">
+                                            @csrf
+                                            {{method_field('DELETE')}}
+                                            <button class="text-red-600 show_confirm" name="delete" onclick="confirmSubmit()" type="submit" title="{{__('dashboard.delete')}}">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <div class="text-4xl text-center text-gray-700 dark:text-gray-100">
+                        {{__('dashboard.showEmpty')}}
+                        <h2 class="text-center py-3 " id="smill">
+                            <i class="far fa-grin-alt fa-3x"></i>
+                        </h2>
+                    </div>
+                @endif
+            </div>
+            @if(!$products->isEmpty())
+                <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+                <span class="flex items-center col-span-3">
+                  {{__('dashboard.number')}}  {{$products->count()}}
+                </span>
+                    <span class="col-span-2"></span>
+                    <!-- Pagination -->
+                    <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
+                  <nav aria-label="Table navigation">
+                    <ul class="inline-flex items-center px-4" dir="ltr">
+                        {!! $products->appends(Request::except('page'))->render() !!}
+                    </ul>
+                  </nav>
+                </span>
+                </div>
+            @endif
+        </div>
+    </div>
+@endsection
+@section('script')
+    <script type="text/javascript">
+        $('.show_confirm').click(function(e) {
+            if(!confirm('{{__('dashboard.delete')}}')) {
+                e.preventDefault();
+            }
+        });
+    </script>
+@endsection

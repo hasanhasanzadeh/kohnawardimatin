@@ -1,0 +1,210 @@
+.body {
+    font-family: iran-yekan !important;
+    font-size: 1rem !important;
+}
+h1,h2,h3,h4,h5,h6{
+    font-family: iran-yekan !important;
+}
+.bg-none {
+    background: none !important;
+}
+
+header.main-header .main-menu {
+    background: white !important;
+    border: none !important;
+}
+
+header.main-header .main-menu .list .amazing-item {
+    background: white;
+    color: black;
+}
+
+header.main-header .main-menu .list > .list-item > a, header.main-header .main-menu .list > .list-item > span {
+    color: black;
+}
+
+header.main-header .main-menu .list > .list-item:hover > a {
+    box-shadow: none !important;
+}
+
+.flex {
+    display: flex;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.justify-content-end {
+    justify-content: end !important;
+}
+
+.btn-logins {
+    border: 1px solid #555555;
+    padding: 10px 30px 10px 30px;
+    text-align: center;
+    border-radius: 8px;
+    margin-left: 20px;
+}
+
+[data-after-text],
+[data-before-text] {
+    --badge-offset-x: calc(0px - var(--badge-size) / 3);
+    --badge-offset-y: calc(0px - var(--badge-size) / 3);
+    --badge-size: 1.5rem;
+    --circle-size: 2rem;
+    --dot-offset: 0.5rem;
+    --dot-size: 0.5rem;
+
+    --b: initial;
+    --bgc: #ef5661;
+    --bdrs: 0;
+    --c: hsl(195, 100%, 99%);
+    --d: inline-flex;
+    --fz: 0.625rem;
+    --fw: 700;
+    --h: auto;
+    --l: initial;
+    --m: 0.4rem;
+    --p: 0;
+    --pos: static;
+    --r: initial;
+    --t: initial;
+    --tt: uppercase;
+    --w: initial;
+
+    position: relative;
+}
+
+[data-after-text]:not([data-after-text=""])::after {
+    content: attr(data-after-text);
+}
+
+[data-before-text]:not([data-before-text=""])::before {
+    content: attr(data-before-text);
+}
+
+[data-after-text]:not([data-after-text=""])::after,
+[data-before-text]:not([data-before-text=""])::before {
+    align-items: center;
+    background: var(--bgc);
+    border-radius: var(--bdrs);
+    bottom: var(--b);
+    box-shadow: var(--bxsh);
+    box-sizing: border-box;
+    color: var(--c);
+    display: var(--d);
+    font-size: var(--fz);
+    font-weight: var(--fw);
+    height: var(--h);
+    justify-content: center;
+    left: var(--l);
+    padding: var(--p);
+    position: var(--pos);
+    right: var(--r);
+    text-decoration: none;
+    text-transform: var(--tt);
+    top: var(--t);
+    width: var(--w);
+}
+
+/* MODIFIERS */
+[data-after-type*="badge"]::after,
+[data-before-type*="badge"]::before {
+    --bdrs: var(--badge-size);
+    --bxsh: 0 0 0 2px rgba(255, 255, 255, 0.5);
+    --h: var(--badge-size);
+    --p: 0;
+    --pos: absolute;
+    --w: var(--badge-size);
+}
+
+{
+    align-items: center
+;
+    display: flex
+;
+}
+
+/* POSITION */
+[data-after-type*="top"]::after,
+[data-before-type*="top"]::before {
+    --b: auto;
+    --pos: absolute;
+    --t: var(--dot-offset);
+}
+
+[data-after-type*="right"]::after,
+[data-before-type*="right"]::before {
+    --l: auto;
+    --pos: absolute;
+    --r: var(--dot-offset);
+}
+
+
+[data-after-type*="badge"][data-after-type*="top"]::after,
+[data-before-type*="badge"][data-before-type*="top"]::before {
+    --m: 0;
+    --t: var(--badge-offset-y);
+}
+
+[data-after-type*="badge"][data-after-type*="right"]::after,
+[data-before-type*="badge"][data-before-type*="right"]::before {
+    --m: 0;
+    --r: var(--badge-offset-x);
+}
+
+[data-after-type*="badge"][data-after-type*="bottom"]::after,
+[data-before-type*="badge"][data-before-type*="bottom"]::before {
+    --b: var(--badge-offset-y);
+    --m: 0;
+}
+
+[data-after-type*="badge"][data-after-type*="left"]::after,
+[data-before-type*="badge"][data-before-type*="left"]::before {
+    --l: var(--badge-offset-x);
+    --m: 0;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.text-primary {
+    color: #1a56db !important;
+}
+@media (max-width: 677px) {
+    .img-carousel{
+        height: 160px!important;
+    }
+    .md-mt-10 {
+        margin-top: 120px !important;
+    }
+    .margin-top-0{
+        margin-top:0 !important;
+    }
+}
+@media (min-width: 678px) {
+    .md-mt-10 {
+        margin-top:10px !important;
+    }
+    .img-carousel{
+        height: 430px !important;
+    }
+    .h-200 {
+        height: 200px !important;
+    }
+    .margin-top-0{
+        margin-top:0 !important;
+    }
+}
+.shopping-page header.header-shopping .checkout-steps li.active::before , .shopping-page header.header-shopping .checkout-steps li a.active::after{
+    z-index: 2 !important;
+}
+ul.gallery-options li,ul.gallery-options{
+    z-index: 50 !important;
+}
+.sub-menu .nav{
+    width: 100% !important;
+}
+

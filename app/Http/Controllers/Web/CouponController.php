@@ -4,18 +4,18 @@ namespace App\Http\Controllers\Web;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CouponAddRequest;
 use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\User;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class CouponController extends Controller
 {
-    public function add(CouponAddRequest $request)
+    public function add(Request $request)
     {
-        $coupon = Coupon::whereDate('expired_at', '>=', Carbon::now()->format('Y-m-d'))->where('status', true)->where('code', $request->code)->first();
+        $coupon = Coupon::whereDate('expired_at', '>=', Carbon::now()->format('Y-m-d'))->where('status', true)->where('code',trim($request->code))->first();
         if (!$coupon) {
             toast('کد تخفیف مورد نظر منقضی شده است', 'error');
             return redirect()->back();

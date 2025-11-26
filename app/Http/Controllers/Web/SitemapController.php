@@ -11,7 +11,7 @@ class SitemapController extends Controller
 {
     public function index()
     {
-        $products=Product::with(['photo','category','brand','meta'])
+        $products=Product::with(['photo','categories','brand','meta'])
             ->where('status',1)
             ->latest()
             ->get();

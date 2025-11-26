@@ -13,7 +13,6 @@
                         <title><![CDATA[{{ $product->title}}]]></title>
                         <link> {{route('product.show',$product->slug)}} </link>
                         <description><![CDATA[{!! $product->description !!}]]></description>
-                        <category>{{$product->category->name}}</category>
                         <author><![CDATA[{{$product->user->full_name}}]]></author>
                         <image>
                             <url>
